@@ -20,6 +20,19 @@
       <img class="search_icon" src="{% static 'search_icon.png' %}" onclick="submit()">
     </div>
   </form>
+   <div class="advanced">
+          <p>Advanced </p>&nbsp<button id="advanced" onclick="getAdvancedOptions()" >+</button>
+      </div>
+      <div style="display:none;" id="advancedField" class="advanced_field" on="false">
+      <div class="advanced">
+          <p>Actor </p>&nbsp<button id="addActor" onclick="addActor()">+</button>
+          <input name="actor" id="actorField"type="text" style="display:none;"></input>
+      </div>
+      <div class="advanced">
+          <p>Release Year </p>&nbsp<button id="addRy" onclick="addRy()">+</button>
+          <input name="year" id="ryField" type="text" style="display:none;"></input>
+      </div>
+      </div>
     <div class="movie">
         <div class="movie-details">
            <ul>

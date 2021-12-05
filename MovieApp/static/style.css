@@ -105,7 +105,7 @@ padding-top:0.5vw;
 .search_field
 {
   position:relative;
-  padding:3vw;
+  padding-top:2vw;
   font-family:Arial;
   font-size: 1vw;
   display: flex;
@@ -153,14 +153,28 @@ position:absolute;
  display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 1vw;
+  padding-bottom: 0.5vw;
     font-family:Arial;
+  font-size:1vw;
 
 }
 .advanced button
 {
-border:0px;
-width:1.5vw;
-height:1.5vw;
- color:#212121;
+border:none;
+width:1.7vw;
+height:1.7vw;
+background-color:#7d7d7c;
+  color:white;
+border-radius:2vw;
+  transition:background-color .2s ease-in-out;
+  font-size: 1vw;
+  font-weight: bold;
+}
+.advanced button:hover
+{
+  background-color:#212121;
+}
+.advanced_field:
+{
+background-color:grey;
 }

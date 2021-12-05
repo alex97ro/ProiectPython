@@ -13,7 +13,14 @@ def index(request):
 
 def search(request):
     template = loader.get_template('themovieapp/index.html')
-    movie = search_movie(request.GET.get('title'))
+    title=request.GET.get('title')
+    advanced=request.GET.get('advanced')
+    actor=request.GET.get('actor')
+    year=request.GET.get('year')
+    if advanced=='true':
+        movie = search_movie(title=title,advanced=True,actor=actor,year=year)
+    else:
+        movie=search_movie(title)
     if movie:
         template = loader.get_template('themovieapp/index.html')
         print(movie)

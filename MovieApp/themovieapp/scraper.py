@@ -17,7 +17,7 @@ def actor_ratio(cast,actor):
     if actor:
       for cast_actor in cast:
         if cast_actor.replace(' ','').lower() == actor.replace(' ','').lower():
-         return 10
+         return 20
         else:
          return 0
     else:
@@ -26,7 +26,7 @@ def actor_ratio(cast,actor):
 #checks the difference between the year given and the release year of the movie and returns a ratio that influences the overall ratio of the option
 def year_ratio(year,realease_year):
     if year:
-     return abs(year-realease_year)*2
+     return abs(int(year)-realease_year)*2
     else:
         return 0
 
@@ -40,8 +40,8 @@ def advanced_search(movies,movie_title,actor,year):
             print(formated_title)
             print(movie.get('releaseyear'))
             print((title_ratio(movie_title, formated_title) - year_ratio(year,int(movie.get('releaseyear'))))+actor_ratio(str(movie.get('cast')).split(','),actor))
-            if (title_ratio(movie_title, formated_title)*100 - year_ratio(year,int(movie.get('releaseyear')))*2)+actor_ratio(str(movie.get('cast')).split(','),actor) > best_ratio:
-                    best_ratio = (title_ratio(movie_title, formated_title)*100 -year_ratio(year,int(movie.get('releaseyear')))*2) + actor_ratio(str(movie.get('cast')).split(','),actor)
+            if (title_ratio(movie_title, formated_title) - year_ratio(year,int(movie.get('releaseyear')))*2)+actor_ratio(str(movie.get('cast')).split(','),actor) > best_ratio:
+                    best_ratio = (title_ratio(movie_title, formated_title) -year_ratio(year,int(movie.get('releaseyear')))*2) + actor_ratio(str(movie.get('cast')).split(','),actor)
                     best_ratio_movie = movie
     return best_ratio_movie
 
@@ -134,6 +134,11 @@ def get_embeded_trailer(title,year):
     return 'http://www.youtube.com/embed/'+trailer_ids[0]
 
 def search_movie(title,advanced=False,actor='None',year='None'):
+    print(title)
+    print(advanced)
+    print(actor)
+    print(year)
+
     #Scraping Rotten Tomatoes website for the movie
     urls=['https://www.rottentomatoes.com/search?search='+str(title)+'/']
     request = requests.get(urls[0], headers = headers)
@@ -177,4 +182,4 @@ def search_movie(title,advanced=False,actor='None',year='None'):
 
 
 #def save_to_DB(json):
-print(search_movie('The party',True,'Joe Pesci',1960))
+#print(search_movie('The party',True,'Joe Pesci',1960))
