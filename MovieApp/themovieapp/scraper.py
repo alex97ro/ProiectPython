@@ -9,10 +9,28 @@ import random
 headers = {
   'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36 QIHU 360SE'
 }
-def similarity_ratio(string1,string2):
-    return SequenceMatcher(None, string1, string2).ratio()
+def title_ratio(string1,string2):
+    return SequenceMatcher(None, string1, string2).ratio()*100
 
-def advanced_check(movies,movie_title,year):
+#checks if given actor is in the movie and returns a 10 ratio that is added to the ratio of the option
+def actor_ratio(cast,actor):
+    if actor:
+      for cast_actor in cast:
+        if cast_actor.replace(' ','').lower() == actor.replace(' ','').lower():
+         return 10
+        else:
+         return 0
+    else:
+        return 0
+
+#checks the difference between the year given and the release year of the movie and returns a ratio that influences the overall ratio of the option
+def year_ratio(year,realease_year):
+    if year:
+     return abs(year-realease_year)*2
+    else:
+        return 0
+
+def advanced_search(movies,movie_title,actor,year):
     best_ratio_movie = movies[0]
     best_ratio = 0
     for movie in movies:
@@ -21,36 +39,39 @@ def advanced_check(movies,movie_title,year):
             formated_title = title.decode_contents().replace(" ", "").replace("\n", "").lower()
             print(formated_title)
             print(movie.get('releaseyear'))
-            print(similarity_ratio(movie_title, formated_title)*100 - abs(year - int(movie.get('releaseyear')))*2)
-            if abs(similarity_ratio(movie_title, formated_title)*100 - abs(year-int(movie.get('releaseyear')))*2) > best_ratio:
-                    best_ratio = similarity_ratio(movie_title, formated_title)*100 - abs(year-int(movie.get('releaseyear')))*2
+            print((title_ratio(movie_title, formated_title) - year_ratio(year,int(movie.get('releaseyear'))))+actor_ratio(str(movie.get('cast')).split(','),actor))
+            if (title_ratio(movie_title, formated_title)*100 - year_ratio(year,int(movie.get('releaseyear')))*2)+actor_ratio(str(movie.get('cast')).split(','),actor) > best_ratio:
+                    best_ratio = (title_ratio(movie_title, formated_title)*100 -year_ratio(year,int(movie.get('releaseyear')))*2) + actor_ratio(str(movie.get('cast')).split(','),actor)
                     best_ratio_movie = movie
     return best_ratio_movie
 
-def check_list(movies,movie_title):
+def search_list(movies,movie_title):
     best_ratio_movie=movies[0]
     best_ratio = 0
     for movie in movies:
         titles=movie.find_all('a',slot='title')
         for title in titles:
             formated_title=title.decode_contents().replace(" ","").replace("\n","").lower()
-            print(similarity_ratio(formated_title,movie_title))
+            print(title_ratio(formated_title,movie_title))
             if formated_title == movie_title:
                 return movie
             else:
-                if similarity_ratio(movie_title,formated_title) > best_ratio:
-                    best_ratio=similarity_ratio(movie_title,formated_title)
+                if title_ratio(movie_title,formated_title) > best_ratio:
+                    best_ratio=title_ratio(movie_title,formated_title)
                     best_ratio_movie=movie
     return best_ratio_movie
 
-def check_movie_tab(soup,title,advanced,year):
+def check_movie_tab(soup,title,advanced,actor,year):
+    #preparing the result list
     movie_tab = soup.find_all('search-page-result', slot='movie')
     movie_tab = BeautifulSoup(str(movie_tab), 'html.parser')
     movies = movie_tab.find_all('search-page-media-row')
-    if advanced:
-        return advanced_check(movies,title,year)
-    else:
-        return check_list(movies,title)
+
+    #we check if additional paramteres have been given
+    if advanced is True:
+        return advanced_search(movies,title,actor,year)
+    elif advanced is False:
+        return search_list(movies,title)
 
 def get_movie_page(url):
     request = requests.get(url, headers=headers)
@@ -112,15 +133,18 @@ def get_embeded_trailer(title,year):
     trailer_ids=get_trailer(title,year)
     return 'http://www.youtube.com/embed/'+trailer_ids[0]
 
-def search_movie(title):
+def search_movie(title,advanced=False,actor='None',year='None'):
+    #Scraping Rotten Tomatoes website for the movie
     urls=['https://www.rottentomatoes.com/search?search='+str(title)+'/']
     request = requests.get(urls[0], headers = headers)
     soup = BeautifulSoup(request.content,'html.parser')
     formated_title=title.replace(" ","").lower()
-
+    # we first check if any matches have been found
     movies=soup.find_all('search-page-media-row')
+
     if movies:
-        movie=check_movie_tab(soup,formated_title,False,2001)
+        movie=check_movie_tab(soup,formated_title,advanced,actor,year)
+
         movie_title=str(movie.find_all('img')[0].get('alt'))
         cast=str(movie.get('cast')).split(',')
         #score=str(movie.get('tomatometerscore'))
@@ -153,4 +177,4 @@ def search_movie(title):
 
 
 #def save_to_DB(json):
-#print(search_movie('memento'))
+print(search_movie('The party',True,'Joe Pesci',1960))
