@@ -1,0 +1,166 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  animation-timing-function: linear;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.movie
+{
+  position:relative;
+  margin:0 auto;
+   width:60vw;
+   height:32vw;
+   background-color:#212121;
+   color:white;
+   font-family:Abel, sans-serif;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.movie ul
+{
+  list-style-type: circle;
+  list-style-position: inside;
+  text-align: left;
+}
+.movie ul li
+{
+padding-top:0.5vw;
+}
+
+.movie-details {
+  width: 40vw;
+  list-style-type: circle;
+  padding-left: 1vw;
+  padding-right:1vw;
+  font-size: 1.1vw;
+
+}
+
+.movie-thumbnail {
+  width: 50%;
+  height: 100%;
+  background-color: black;
+}
+
+.movie-thumbnail-image{
+  position: relative;
+}
+
+.movie-thumbnail-image img{
+  width: 100%;
+  height: 100%;
+  transition:opacity .2s ease-in;
+
+}
+.movie-thumbnail-image img:hover
+{
+  opacity:0.05;
+}
+
+.play_trailer {
+  position: relative;
+  left: 50%;
+  width:100%;
+  height:100%;
+  transform: translate(-50%);
+  display:none;
+}
+.reviews
+{
+  font-size: 0.9vw;
+  border-top: solid 5px;
+  text-align:center;
+
+}
+.score
+{
+  border-top: solid 5px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-size: 2vw;
+  font-weight: bold;
+  padding-top:1.5vw;
+  padding-bottom: 1vw;
+
+}
+.tomatometer
+{
+  width:5vw;
+  height:auto;
+}
+.audience
+{
+  width:3.8vw;
+  height:auto;
+  margin-left: 2.5vw;
+}
+.search_field
+{
+  position:relative;
+  padding:3vw;
+  font-family:Arial;
+  font-size: 1vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.movie_icon
+{
+  width:3vw;
+  height:2.2vw;
+  padding-right:0.5vw;
+
+}
+.search_icon
+{
+  width:2.5vw;
+  height:auto;
+  transition: ease-in .3s;
+  cursor:pointer;
+}
+.search_icon:hover
+{
+  width:3%;
+  height:3%;
+}
+.search_bar
+{
+  width:20vw;
+  height:1.7vw
+}
+.play_button
+{
+filter: brightness(500%);
+opacity:0.8;
+margin-left:5.2vw;
+margin-top:8.7vw;
+z-index: 2;
+width:15vw;
+height:auto;
+position:absolute;
+
+}
+.advanced
+{
+ display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1vw;
+    font-family:Arial;
+
+}
+.advanced button
+{
+border:0px;
+width:1.5vw;
+height:1.5vw;
+ color:#212121;
+}

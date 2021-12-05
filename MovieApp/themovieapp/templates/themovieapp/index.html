@@ -1,0 +1,68 @@
+<html>
+</<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+         <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
+         {% load static %}
+         <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+         <script type="text/javascript" src="{% static 'script.js' %}"></script>
+
+    <title></title>
+  </head>
+  <body>
+  <form id="movieForm" action="search" method="GET">
+    <div class="search_field">
+      <img class="movie_icon" src="{% static 'movie_icon4.png' %}">
+      <p>Search movies by title or by actor's name &nbsp
+      </p>
+      <input name="title" type="text" placeholder="Movie.." size="30" class="search_bar">
+      <img class="search_icon" src="{% static 'search_icon.png' %}" onclick="submit()">
+    </div>
+      <div class="advanced">
+          <p>Advanced </p><button id="advanced" onclick="getAdvancedOptions()">+</button>
+      </div>
+      <div class="advanced" style="visibility: hidden;">
+          <p>Actor </p><button id="advancedActor" >+</button>
+      </div>
+      <div class="advanced" style="visibility: hidden;">
+          <p>Release Year </p><button id="advancedRy" >+</button>
+      </div>
+  </form>
+    <div class="movie">
+        <div class="movie-details">
+           <ul>
+            <li>Title : {{title}}</li>
+            <li>Release Year : {{release_year}}</li>
+            <li>Cast :
+                {% for actor in cast %}
+                <span>{{actor}} | </span>
+                {% endfor %}
+            </li>
+            <br>
+               Reviews
+            <p class='reviews'>
+                <br>
+                {% for review in movie_reviews %}
+                <em>"{{review}}"</em>
+                <br>
+                <br>
+                {% endfor %}
+            </p>
+               Score
+            <div class="score">
+              <img src="{% static 'tomatometer.png' %}" class="tomatometer"><p id="tomatometer">{{critics_score}}</p><p>%</p>
+              <img src="{% static 'audience.png' %}" class="audience"><p id="audience">{{audience_score}}</p><p>%</p>
+            </div>
+            </ul>
+        </div>
+        <div id="movieThumbnail" class="movie-thumbnail">
+            <img id="playButton" class="play_button" src="{% static 'play_button.png' %}">
+          <div class="movie-thumbnail-image">
+            <img id="thumbnail" alt='Movie poster not available!' src="{{thumbnail_url}}" class="thumbnail-img"></img>
+            <iframe id="trailer"class="play_trailer" src="{{youtube_trailer}}" frameborder="0" donotallowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+  </body>
+</html>

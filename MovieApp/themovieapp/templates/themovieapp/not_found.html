@@ -1,0 +1,25 @@
+<html>
+</<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+         <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
+         {% load static %}
+         <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+         <script type="text/javascript" src="{% static 'script.js' %}"></script>
+
+    <title></title>
+  </head>
+  <body>
+    <form id="movieForm" action="search" method="GET">
+        <div class="search_field">
+         <img class="movie_icon" src="{% static 'movie_icon4.png' %}">
+             <p>Search movies by title or by actor's name &nbsp
+             </p>
+            <input name="title" type="text" placeholder="Movie.." size="30" class="search_bar">
+        <img class="search_icon" src="{% static 'search_icon.png' %}" onclick="submit()">
+        </div>
+    </form>
+  <p class="movie">Movie not found!</p>
+  </body>
+</html>
