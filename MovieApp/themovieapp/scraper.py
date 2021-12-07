@@ -175,7 +175,7 @@ def search_movie(title,advanced=False,actor='None',year='None'):
         # print('Audience Score:' + get_audience_score(url))
         # print('\n' + 'Tomato Meter:' + get_critic_score(url))
         # print(get_critic_reviews(url))
-        print(str(get_trailer(title,release_year))+'!!!!!!!!!')
+        #print(str(get_trailer(title,release_year))+'!!!!!!!!!')
         return movie_dict
     else:
         return False

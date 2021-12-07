@@ -70,7 +70,6 @@
         form.setAttribute('method', "GET");
             form.setAttribute('action',"search");
              form.style.display='none';
-             document.body.appendChild(form);
 
       var titlePlaceholder=document.getElementById('titlePlaceholder');
           var actorPlaceholder=document.getElementById('actorPlaceholder');
@@ -103,6 +102,8 @@
       form.appendChild(advancedInput);
       form.appendChild(actorInput);
       form.appendChild(yearInput);
+      document.body.appendChild(form);
+
 
       form.submit();
 
@@ -113,24 +114,26 @@
 
          var advanced_field=document.getElementById('advancedField');
          var button=document.getElementById('advanced');
-         var ry_field=document.getElementById('yearField');
-         var ryButton=document.getElementById('addRy');
-         var actor_field=document.getElementById('actorField');
-         var actorButton=document.getElementById('addActor');
+         var icon=document.getElementById('advancedIcon');
 
         if(advanced_field.style.display=='none')
          {
             advanced_field.style.display='block';
             advanced_field.setAttribute('on','true');
-            button.textContent='Hide';
+            button.textContent='Disable';
+            icon.classList.remove('advanced_icon');
+            icon.classList.add('advanced_icon_spin');
          }
         else if(advanced_field.style.display=='block')
          {
             advanced_field.style.display='none';
             advanced_field.setAttribute('on','false');
-            button.textContent='Show';
-         }
+            button.textContent='Enable';
+            icon.classList.remove('advanced_icon_spin');
+            icon.classList.add('advanced_icon');
+
       }
+    }
 
       function addActor()
       {
