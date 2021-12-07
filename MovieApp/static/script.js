@@ -63,25 +63,47 @@
         },15);
       });
 
-      function submit()
+      function Submit()
       {
 
-      var form=document.getElementById('movieForm');
-      var button=document.getElementById('advanced');
+      var form=document.createElement("form");
+        form.setAttribute('method', "GET");
+            form.setAttribute('action',"search");
+             form.style.display='none';
+             document.body.appendChild(form);
+
+      var titlePlaceholder=document.getElementById('titlePlaceholder');
+          var actorPlaceholder=document.getElementById('actorPlaceholder');
+             var yearPlaceholder=document.getElementById('yearPlaceholder');
+
+
+
+
+      var titleInput=titlePlaceholder.cloneNode(true);
+          var actorInput=actorPlaceholder.cloneNode(true);
+             var yearInput=yearPlaceholder.cloneNode(true);
+
+                      yearPlaceholder.disabled=true;
+                        actorPlaceholder.disabled=true;
+
+                  console.log(titleInput);
+                  console.log(actorInput);
+                  console.log(yearInput.value);
+
+
       var advanced_field=document.getElementById('advancedField');
-      var ry_field=document.getElementById('ryField');
-      var actor_field=document.getElementById('actorField');
-      var advanced=document.createElement('input');
-      advanced_field.disabled=true;
-      actor_field.style.display='none';
-      ry_field.style.display='none';
-      advanced.style.display='none';
-      advanced.setAttribute('type','text');
-      advanced.setAttribute('name','advanced');
-      advanced.setAttribute('value',advanced_field.getAttribute('on'));
-      form.appendChild(advanced);
-      form.appendChild(ry_field);
-      form.appendChild(actor_field);
+        var advancedInput=document.createElement('input');
+         advancedInput.setAttribute('type','text');
+          advancedInput.setAttribute('name','advanced');
+            advancedInput.setAttribute('value',advanced_field.getAttribute('on'));
+
+            console.log(advancedInput);
+
+      form.appendChild(titleInput);
+      form.appendChild(advancedInput);
+      form.appendChild(actorInput);
+      form.appendChild(yearInput);
+
       form.submit();
 
       }
@@ -91,7 +113,7 @@
 
          var advanced_field=document.getElementById('advancedField');
          var button=document.getElementById('advanced');
-         var ry_field=document.getElementById('ryField');
+         var ry_field=document.getElementById('yearField');
          var ryButton=document.getElementById('addRy');
          var actor_field=document.getElementById('actorField');
          var actorButton=document.getElementById('addActor');
@@ -100,52 +122,52 @@
          {
             advanced_field.style.display='block';
             advanced_field.setAttribute('on','true');
-            button.textContent='-';
+            button.textContent='Hide';
          }
         else if(advanced_field.style.display=='block')
          {
             advanced_field.style.display='none';
             advanced_field.setAttribute('on','false');
-            button.textContent='+';
-            ry_field.style.display='none';
-            ryButton.textContent='+';
-            actor_field.style.display='none';
-            actorButton.textContent='+';
+            button.textContent='Show';
          }
       }
 
       function addActor()
       {
-        var actor_field=document.getElementById('actorField');
         var button=document.getElementById('addActor');
+        var placeholder=document.getElementById('actorPlaceholder');
 
-         if(actor_field.style.display=='none')
+         if(placeholder.style.display=='none')
           {
-            actor_field.style.display='block';
-            button.textContent='-';
+            placeholder.style.display='block';
+            button.textContent='Remove';
           }
-          else if(actor_field.style.display=='block')
+          else if(placeholder.style.display=='block')
           {
-            actor_field.style.display='none';
-            button.textContent='+';
+            placeholder.style.display='none';
+            button.textContent='Add';
+            placeholder.value='';
+
           }
 
       }
 
-       function addRy()
+       function addYear()
       {
-        var ry_field=document.getElementById('ryField');
-        var button=document.getElementById('addRy');
+        var button=document.getElementById('addYear');
+        var placeholder=document.getElementById('yearPlaceholder');
 
-         if(ry_field.style.display=='none')
+
+         if(placeholder.style.display=='none')
           {
-            ry_field.style.display='block';
-            button.textContent='-';
+            placeholder.style.display='block';
+            button.textContent='Remove';
           }
-          else if(ry_field.style.display=='block')
+          else if(placeholder.style.display=='block')
           {
-            ry_field.style.display='none';
-            button.textContent='+';
+            placeholder.style.display='none';
+            button.textContent='Add';
+            placeholder.value='';
           }
 
       }
@@ -154,7 +176,7 @@
       {
       window.addEventListener('keydown',function(event){
     if(event.keyCode == 13) {
-     submit();
+     Submit();
     }
   });
 });

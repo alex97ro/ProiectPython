@@ -17,7 +17,7 @@ def search(request):
     advanced=request.GET.get('advanced')
     actor=request.GET.get('actor')
     year=request.GET.get('year')
-    if advanced=='true':
+    if advanced=='true' and (actor or year):
         movie = search_movie(title=title,advanced=True,actor=actor,year=year)
     else:
         movie=search_movie(title)

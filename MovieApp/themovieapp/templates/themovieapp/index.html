@@ -6,33 +6,36 @@
          <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
          {% load static %}
          <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-         <script type="text/javascript" src="{% static 'script.js' %}"></script>
 
     <title></title>
   </head>
   <body>
-  <form id="movieForm" action="search" method="GET">
     <div class="search_field">
       <img class="movie_icon" src="{% static 'movie_icon4.png' %}">
       <p>Search movies by title or by actor's name &nbsp
       </p>
-      <input name="title" type="text" placeholder="Movie.." size="30" class="search_bar">
-      <img class="search_icon" src="{% static 'search_icon.png' %}" onclick="submit()">
+      <input id="titlePlaceholder" name="title" type="text" placeholder="Movie.." size="30" class="search_bar">
+      <img class="search_icon" src="{% static 'search_icon.png' %}" onclick="Submit()">
     </div>
-  </form>
-   <div class="advanced">
-          <p>Advanced </p>&nbsp<button id="advanced" onclick="getAdvancedOptions()" >+</button>
+    <div class="advanced">
+          Advanced <button id="advanced" onclick="getAdvancedOptions()" class="addButton">Show</button>
+      <div style="display:none;" id="advancedField" on="false">
+        <div class="actor_field">
+            <div id="actorField">
+                 <p class="label">Actor's name</p>
+          <button id="addActor" onclick="addActor()" class="addButton">Add</button>
+          <input class="actor_input" name="actor" id="actorPlaceholder" type="text" style="display:none;">
+            </div>
       </div>
-      <div style="display:none;" id="advancedField" class="advanced_field" on="false">
-      <div class="advanced">
-          <p>Actor </p>&nbsp<button id="addActor" onclick="addActor()">+</button>
-          <input name="actor" id="actorField"type="text" style="display:none;"></input>
+          <div class="year_field">
+              <div id="yearField">
+                   <p class="label">Release year</p>
+           <button id="addYear" onclick="addYear()" class="addButton">Add</button>
+          <input class="year_input" name="year" id="yearPlaceholder" type="number" min="1900" max="2030" step="1" value=""  style="display:none;">
+              </div>
+              </div>
       </div>
-      <div class="advanced">
-          <p>Release Year </p>&nbsp<button id="addRy" onclick="addRy()">+</button>
-          <input name="year" id="ryField" type="text" style="display:none;"></input>
-      </div>
-      </div>
+    </div>
     <div class="movie">
         <div class="movie-details">
            <ul>
@@ -68,5 +71,6 @@
           </div>
         </div>
       </div>
+  <script type="text/javascript" src="{% static 'script.js' %}"></script>
   </body>
 </html>
