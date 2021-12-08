@@ -9,15 +9,23 @@
 
     <title></title>
   </head>
-  <body>
-    <div class="search_field">
+  <body style="background:linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('{% static 'background.jpg' %}');background-size:cover;">
+  <ul class="navbar">
+  <li><a class="active" href="#home">Home</a></li>
+  <li><a href="#news">News</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="#about">About</a></li>
+      <li>
+          <div class="search_field">
       <img class="movie_icon" src="{% static 'movie_icon4.png' %}">
       <p>Search movies by title or by actor's name &nbsp
       </p>
       <input id="titlePlaceholder" name="title" type="text" placeholder="Movie.." size="30" class="search_bar">
       <img class="search_icon" src="{% static 'search_icon.png' %}" onclick="Submit()">
     </div>
-    <div class="advanced">
+      </li>
+      <li>
+           <div class="advanced">
               <img id="advancedIcon" class="advanced_icon" src="{% static 'advanced_icon.png' %}">
           Advanced Options <button id="advanced" onclick="getAdvancedOptions()" class="addButton">Enable</button>
       <div style="display:none;" id="advancedField" on="false">
@@ -37,6 +45,10 @@
               </div>
       </div>
     </div>
+      </li>
+</ul>
+
+
     <div class="movie">
         <div class="movie-details">
            <ul>
