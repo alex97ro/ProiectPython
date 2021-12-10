@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .scraper import search_movie
+from .dbmanager import *
 
 
 def index(request):
@@ -17,13 +18,16 @@ def search(request):
     advanced=request.GET.get('advanced')
     actor=request.GET.get('actor')
     year=request.GET.get('year')
-    if advanced=='true' and (actor or year):
+    movie=movie_exists_db(title,year)
+    if movie==None:
+      print('not found in db')
+      if advanced=='true' and (actor or year):
         movie = search_movie(title=title,advanced=True,actor=actor,year=year)
-    else:
+      else:
         movie=search_movie(title)
+      save_movie_to_DB(movie)
     if movie:
         template = loader.get_template('themovieapp/index.html')
-        print(movie)
         return render(request, 'index.html', movie)
     else:
         template = loader.get_template('themovieapp/not_found.html')
