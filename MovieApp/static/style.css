@@ -294,3 +294,20 @@ float:left;
 .navbar li a:hover {
   background-color: #111;
 }
+.swiper
+{
+width:60vw;
+position:relative;
+ display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.swiper-button-prev {
+    color:  #212121;
+    opacity:0.8;
+}
+
+.swiper-button-next {
+    color:  #212121;
+    opacity:0.8;
+}

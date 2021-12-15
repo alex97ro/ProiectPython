@@ -1,0 +1,69 @@
+<html>
+</<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+      <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+         <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
+         {% load static %}
+         <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+    <title></title>
+  </head>
+  <body style="background:linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('{% static 'background.jpg' %}');background-size:cover;">
+  <ul class="navbar">
+  <li><a href='/'>Search</a></li>
+  <li><a class="active" href="movies">Movies</a></li>
+     </ul>
+
+<div class="swiper">
+   <div class="swiper-wrapper">
+       {% for movie in movies%}
+       <div class="swiper-slide">
+    <div class="movie">
+        <div class="movie-details">
+           <ul>
+            <li>Title : {{movie.title}}</li>
+            <li>Release Year : {{movie.release_year}}</li>
+            <li>Cast :
+                {% for actor in movie.cast %}
+                <span>{{actor}} | </span>
+                {% endfor %}
+            </li>
+            <br>
+               Reviews
+            <p class='reviews'>
+                <br>
+                {% for review in movie.movie_reviews %}
+                <em>"{{review}}"</em>
+                <br>
+                <br>
+                {% endfor %}
+            </p>
+               Score
+            <div class="score">
+              <img src="{% static 'tomatometer.png' %}" class="tomatometer"><p id="tomatometer">{{movie.critics_score}}</p><p>%</p>
+              <img src="{% static 'audience.png' %}" class="audience"><p id="audience">{{movie.audience_score}}</p><p>%</p>
+            </div>
+            </ul>
+        </div>
+        <div id="movieThumbnail" class="movie-thumbnail">
+            <img id="playButton" class="play_button" src="{% static 'play_button.png' %}">
+          <div class="movie-thumbnail-image">
+            <img id="thumbnail" alt='Movie poster not available!' src="{{movie.thumbnail_url}}" class="thumbnail-img"></img>
+            <iframe id="trailer"class="play_trailer" src="{{movie.youtube_trailer}}" frameborder="0" donotallowfullscreen></iframe>
+          </div>
+        </div>
+        </div>
+     </div>
+        {%endfor%}
+</div>
+</div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+  <script type="text/javascript" src="{% static 'script.js' %}"></script>
+   <script type="text/javascript" src="{% static 'swiper_init.js' %}"></script>
+  </body>
+</html>

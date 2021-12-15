@@ -116,7 +116,11 @@ def get_critic_reviews(moviepageurl):
 
 def get_thumbnail_src(moviepageurl):
     soup=get_movie_page(moviepageurl)
-    return BeautifulSoup(str(soup.find_all('div',{'class':'movie-thumbnail-wrap'})[0]),'html.parser').find_all('img')[0].get('data-src')
+    thumbnail_url=BeautifulSoup(str(soup.find_all('div',{'class':'movie-thumbnail-wrap'})[0]),'html.parser').find_all('img')[0].get('data-src')
+    if thumbnail_url:
+        return thumbnail_url
+    else:
+        return 'No thumbnail found!'
 
 def get_trailer(title,year):
    url='https://www.google.com/search?q='+(title.replace(' ','+')+'+'+year).replace(r'++','+')+'+trailer'
@@ -134,10 +138,6 @@ def get_embeded_trailer(title,year):
     return 'http://www.youtube.com/embed/'+trailer_ids[0]
 
 def search_movie(title,advanced=False,actor='None',year='None'):
-    print(title)
-    print(advanced)
-    print(actor)
-    print(year)
 
     #Scraping Rotten Tomatoes website for the movie
     urls=['https://www.rottentomatoes.com/search?search='+str(title)+'/']

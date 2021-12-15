@@ -10,16 +10,43 @@
 
     <title></title>
   </head>
-  <body>
-    <form id="movieForm" action="search" method="GET">
-        <div class="search_field">
-         <img class="movie_icon" src="{% static 'movie_icon4.png' %}">
-             <p>Search movies by title or by actor's name &nbsp
-             </p>
-            <input name="title" type="text" placeholder="Movie.." size="30" class="search_bar">
-        <img class="search_icon" src="{% static 'search_icon.png' %}" onclick="submit()">
-        </div>
-    </form>
+<body style="background:linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0.4)),url('{% static 'background.jpg' %}');background-size:cover;">
+  <ul class="navbar">
+  <li><a class="active" href="/">Home</a></li>
+  <li><a href="/movies">Movies</a></li>
+
+      <li>
+          <div class="search_field">
+      <img class="movie_icon" src="{% static 'movie_icon4.png' %}">
+      <p>Search movies by title or by actor's name &nbsp
+      </p>
+      <input id="titlePlaceholder" name="title" type="text" placeholder="Movie.." size="30" class="search_bar">
+      <img class="search_icon" src="{% static 'search_icon.png' %}" onclick="Submit()">
+    </div>
+      </li>
+      <li>
+           <div class="advanced">
+              <img id="advancedIcon" class="advanced_icon" src="{% static 'advanced_icon.png' %}">
+          Advanced Options <button id="advanced" onclick="getAdvancedOptions()" class="addButton">Enable</button>
+      <div style="display:none;" id="advancedField" on="false">
+        <div class="actor_field">
+            <div id="actorField">
+                 <p class="label">Actor's name</p>
+          <button id="addActor" onclick="addActor()" class="addButton">Add</button>
+          <input class="actor_input" name="actor" id="actorPlaceholder" type="text" style="display:none;">
+            </div>
+      </div>
+          <div class="year_field">
+              <div id="yearField">
+                   <p class="label">Release year</p>
+           <button id="addYear" onclick="addYear()" class="addButton">Add</button>
+          <input class="year_input" name="year" id="yearPlaceholder" type="number" min="1900" max="2030" step="1" value=""  style="display:none;">
+              </div>
+              </div>
+      </div>
+    </div>
+      </li>
+</ul>
   <p class="movie">Movie not found!</p>
   </body>
 </html>
